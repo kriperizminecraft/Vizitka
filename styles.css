@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -10,11 +10,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #8B0000, #000000);
+    background: linear-gradient(135deg, #1a0000, #000);
     background-size: 200% 200%;
     color: #fff;
-    overflow-x: hidden;
-    animation: gradientShift 15s ease infinite;
+    overflow: hidden;
+    animation: gradientShift 10s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -23,41 +23,69 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FF4040;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: float 5s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-20px); opacity: 0.8; }
+}
+
 .container {
     max-width: 900px;
     width: 90%;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    padding: 2.5rem;
+    background: rgba(10, 10, 10, 0.7);
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 50px rgba(255, 64, 64, 0.3);
     text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.avatar-wrapper {
+    perspective: 1000px;
+    margin: 0 auto 1.5rem;
 }
 
 .avatar {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 auto 1.5rem;
-    border: 5px solid #fff;
-    transition: transform 0.3s ease;
-}
-
-.avatar:hover {
-    transform: scale(1.1);
+    border: 5px solid #FF4040;
+    box-shadow: 0 0 20px #FF4040;
+    transition: transform 0.5s ease;
 }
 
 h1 {
-    font-size: 2.8rem;
+    font-size: 3rem;
     margin-bottom: 0.5rem;
-    color: #FF4040;
+    color: #fff;
+    text-shadow: 0 0 10px #FF4040, 0 0 20px #FF4040;
 }
 
 p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 2rem;
-    color: #D3D3D3;
+    color: #FFD1D1;
 }
 
 .social-links {
@@ -71,18 +99,19 @@ p {
 .social-btn {
     display: flex;
     align-items: center;
-    padding: 0.8rem 1.8rem;
-    background: #FF4040;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(45deg, #FF4040, #CC0000);
     color: #fff;
     text-decoration: none;
     border-radius: 50px;
-    font-weight: bold;
+    font-weight: 600;
+    box-shadow: 0 0 15px #FF4040;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .social-btn:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(255, 64, 64, 0.5);
+    box-shadow: 0 0 25px #FF4040;
 }
 
 .social-btn img {
@@ -97,13 +126,20 @@ p {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.8rem 2rem;
-    background: #000;
+    background: transparent;
     color: #FF4040;
     border: 2px solid #FF4040;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+    box-shadow: 0 0 15px #FF4040;
+    transition: all 0.3s;
+}
+
+.contact-btn:hover {
+    background: #FF4040;
+    color: #fff;
+    box-shadow: 0 0 25px #FF4040;
 }
 
 .contact-btn img {
@@ -111,15 +147,11 @@ p {
     height: 24px;
 }
 
-.contact-btn:hover {
-    background: #FF4040;
-    color: #fff;
-}
-
 .activity-timer {
     margin-top: 1.5rem;
-    font-size: 1.1rem;
-    color: #D3D3D3;
+    font-size: 1.2rem;
+    color: #FFD1D1;
+    text-shadow: 0 0 5px #FF4040;
 }
 
 /* Модальное окно */
@@ -130,10 +162,10 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
 }
 
 .modal.show {
@@ -141,15 +173,17 @@ p {
 }
 
 .modal-content {
-    background: #1C2526;
+    background: linear-gradient(135deg, #1a0000, #000);
     margin: 15% auto;
     padding: 2rem;
     border-radius: 15px;
     width: 90%;
     max-width: 500px;
     position: relative;
+    border: 1px solid #FF4040;
+    box-shadow: 0 0 30px #FF4040;
     transform: translateY(-50px);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .modal.show .modal-content {
@@ -173,6 +207,7 @@ p {
 .modal-content h2 {
     margin-bottom: 1.5rem;
     color: #FF4040;
+    text-shadow: 0 0 10px #FF4040;
 }
 
 form input, form textarea {
@@ -181,49 +216,51 @@ form input, form textarea {
     margin-bottom: 1rem;
     border: 1px solid #FF4040;
     border-radius: 5px;
-    background: #2C3539;
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
     font-size: 1rem;
 }
 
 form textarea {
-    height: 100px;
+    height: 120px;
     resize: none;
 }
 
 form button {
     width: 100%;
     padding: 0.8rem;
-    background: #FF4040;
+    background: linear-gradient(45deg, #FF4040, #CC0000);
     color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: background 0.3s;
+    box-shadow: 0 0 15px #FF4040;
+    transition: all 0.3s;
 }
 
 form button:hover {
-    background: #CC0000;
+    background: linear-gradient(45deg, #CC0000, #FF4040);
+    box-shadow: 0 0 25px #FF4040;
 }
 
 /* Адаптивность */
 @media (max-width: 600px) {
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .avatar {
-        width: 140px;
-        height: 140px;
+        width: 150px;
+        height: 150px;
     }
 
     .social-btn {
-        padding: 0.6rem 1.4rem;
+        padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
     }
 
@@ -235,5 +272,10 @@ form button:hover {
     .modal-content {
         margin: 20% auto;
         padding: 1.5rem;
+    }
+
+    .particle {
+        width: 3px;
+        height: 3px;
     }
 }
