@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваша Визитка</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
+        <h1>Ваше Имя</h1>
+        <p>Креатор контента | Путешественник | Любитель жизни</p>
+        <div class="social-links">
+            <a href="https://www.tiktok.com/" target="_blank" class="social-btn">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok.png" alt="TikTok">
+                TikTok
+            </a>
+            <a href="https://funpay.com/" target="_blank" class="social-btn">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/money.png" alt="FunPay">
+                FunPay
+            </a>
+        </div>
+        <button class="contact-btn" onclick="openModal()">
+            <img src="https://img.icons8.com/ios-filled/24/ffffff/email.png" alt="Contact">
+            Связаться со мной
+        </button>
+        <div class="activity-timer">
+            <p>Последняя активность в соцсетях: <span id="timer">0</span> минут назад</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <h2>Обратная связь</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Ваше имя" required>
+                <input type="email" id="email" placeholder="Ваш email" required>
+                <textarea id="message" placeholder="Ваше сообщение" required></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Анимация появления
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                container.style.transition = 'all 0.5s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Таймер активности
+            let minutes = 0;
+            const timerElement = document.getElementById('timer');
+            setInterval(() => {
+                minutes++;
+                timerElement.textContent = minutes;
+            }, 60000);
+
+            // Обработка формы
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Сообщение отправлено! (Это демо)');
+                closeModal();
+            });
+
+            // Параллакс эффект
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                document.body.style.backgroundPosition = `${x}px ${y}px`;
+            });
+        });
+
+        // Модальное окно
+        function openModal() {
+            const modal = document.getElementById('contactModal');
+            modal.style.display = 'block';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.getElementById('contactForm').reset();
+            }, 300);
+        }
+
+        // Закрытие модального окна при клике вне
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+  </html>
