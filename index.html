@@ -7,16 +7,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="particles"></div>
     <div class="container">
-        <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
+        <div class="avatar-wrapper">
+            <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
+        </div>
         <h1>Ваше Имя</h1>
-        <p>Креатор контента | Путешественник | Любитель жизни</p>
+        <p>Гений | Тиктокер, юзер нурсултана</p>
         <div class="social-links">
-            <a href="https://www.tiktok.com/" target="_blank" class="social-btn">
+            <a href="tiktok.com/@nedos1mplexzz" target="_blank" class="social-btn">
                 <img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok.png" alt="TikTok">
                 TikTok
             </a>
-            <a href="https://funpay.com/" target="_blank" class="social-btn">
+            <a href="https://funpay.com/users/13168138/" target="_blank" class="social-btn">
                 <img src="https://img.icons8.com/ios-filled/50/ffffff/money.png" alt="FunPay">
                 FunPay
             </a>
@@ -26,7 +29,7 @@
             Связаться со мной
         </button>
         <div class="activity-timer">
-            <p>Последняя активность в соцсетях: <span id="timer">0</span> минут назад</p>
+            <p>Активность в соцсетях: <span id="timer">0</span> мин назад</p>
         </div>
     </div>
 
@@ -49,9 +52,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.querySelector('.container');
             container.style.opacity = '0';
-            container.style.transform = 'translateY(20px)';
+            container.style.transform = 'translateY(30px)';
             setTimeout(() => {
-                container.style.transition = 'all 0.5s ease';
+                container.style.transition = 'all 0.8s ease';
                 container.style.opacity = '1';
                 container.style.transform = 'translateY(0)';
             }, 100);
@@ -67,16 +70,27 @@
             // Обработка формы
             document.getElementById('contactForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                alert('Сообщение отправлено! (Это демо)');
+                alert('Сообщение отправлено! (Демо)');
                 closeModal();
             });
 
-            // Параллакс эффект
+            // Параллакс и частицы
             document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth - 0.5) * 20;
-                const y = (e.clientY / window.innerHeight - 0.5) * 20;
-                document.body.style.backgroundPosition = `${x}px ${y}px`;
+                const x = (e.clientX / window.innerWidth - 0.5) * 15;
+                const y = (e.clientY / window.innerHeight - 0.5) * 15;
+                document.querySelector('.avatar-wrapper').style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
             });
+
+            // Частицы
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particlesContainer.appendChild(particle);
+            }
         });
 
         // Модальное окно
@@ -97,7 +111,6 @@
             }, 300);
         }
 
-        // Закрытие модального окна при клике вне
         window.onclick = function(event) {
             const modal = document.getElementById('contactModal');
             if (event.target === modal) {
@@ -106,4 +119,4 @@
         };
     </script>
 </body>
-  </html>
+</html>
